@@ -44,29 +44,15 @@ Cada modelo fue evaluado utilizando métricas como:
 - **MAE** (Mean Absolute Error)
 - **RMSE** (Root Mean Squared Error)
 - **MAPE** (Mean Absolute Percentage Error)
-- **WMAPE** (Weighted Mean Absolute Percentage Error)
 
-## Resultados y Observaciones
-- **Huber Regressor**
-  - **WMAPE ≈ 51%** (el mejor entre los probados), R² ≲ 0.
-  - **MAPE = 34%**
-  - Gráfica: predicciones **muy contraídas** alrededor del centro; subestima la cola alta. “Mejora” el wMAPE al reducir errores grandes, pero a costa de **baja varianza** en ŷ.
+## Conclusiones
 
-- **CatBoost Regressor**
-  - **wMAPE ≈ 51–52%**, R² ≲ 0 (similar a Huber).
-  - Gráfica: distribución de ŷ **más angosta** y **desplazada a la izquierda** respecto a y; no captura bien primas altas.
+A partir de los modelos evaluados se puede observar que los mejores resultados fueron obtenidos por **Árboles de Decisión, Bosques Aleatorios, Adaptative Boosting y Gradient Boosting**:
 
-- **Gradient Boosting Regressor**
-  - **wMAPE ≈ 51–52%**, R² ≲ 0 (empatado con CatBoost).
-  - Gráfica: patrón parecido a CatBoost; tendencia a **subestimar** en los tramos altos.
+- **Árboles de Decisión:** MAPE ≈ **38%** en Train y Test.  
+- **Bosques Aleatorios:** MAPE ≈ **37%** en Train y Test.  
+- **Adaptative Boosting:** MAPE ≈ **0.01%** en Train y **15%** en Test. Cumple con la hipótesis planteada, pero evidencia un **sobreajuste considerable**.  
+- **Gradient Boosting:** MAPE ≈ **11%** en Train y **17%** en Test. Aunque no cumple con la hipótesis del 15%, resulta el **modelo más balanceado**.  
 
-- **AdaBoost Regressor**
-  - **wMAPE ≈ 71%** en prueba vs **≈ 0.1%** en entrenamiento → **sobreajuste severo**.
-  - Gráfica: ajuste casi perfecto en train; en prueba las predicciones se comprimen y quedan **sesgadas a la baja**, aún así de las gráficas es de las mejores a considerar.
-
-- **Extra Trees Regressor**
-  - **wMAPE ≈ 77%**, R² ≈ 0.
-  - Gráfica: ŷ claramente **subestima** la cola y concentra masa en el rango medio; peor desempeño relativo.
-
-> **Conclusión:** Ningún modelo probó estar cerca del objetivo de **≤ 15% wMAPE**. Los mejores (Huber / CatBoost / Gradient Boosting) se sitúan alrededor de **≈ 51–52%**, mientras que AdaBoost y Extra Trees quedan por encima de **70%**.
+Según los resultados, se determina que **Gradient Boosting** es el modelo más adecuado, dado que presenta un mejor balance entre entrenamiento y prueba, y se aproxima al umbral de error establecido.
 
